@@ -127,5 +127,13 @@ console.log(require.resolve('prismjs/components/prism-core'));
   ... 142 more items ]
 ```
 
+## 3.此处的require
 
+在webpack中指定过了entry.js只是说从这个文件开始打包，打包的过程可以使用特定的loader。但是，我这里直接执行node main.js其实是直接执行这个模块而不仅仅是打包这个模块！
 
+所以，当你引入node-prismjs的时候其实是把primjs中所有的模块都会引入了，因为有下面的代码被执行了:
+
+```js
+componentsSet
+  .forEach((component) => require(path.join(prismComponents, component)));
+```
